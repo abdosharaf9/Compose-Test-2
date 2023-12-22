@@ -33,6 +33,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.BaselineShift
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
@@ -63,13 +64,48 @@ class MainActivity : ComponentActivity() {
 fun GreetingPreview() {
     ComposeTest2Theme {
         SelectionContainer {
-            Column {
-                Text(text = "Hello World!")
-                DisableSelection {
-                    Text(text = "Not selectable text")
-                }
-                Text(text = "Hello World!")
+            Column(modifier = Modifier.fillMaxSize()) {
+                SuperScriptText(normalText = "Normal Text", superText = "Super Text")
+                SubScriptText(normalText = "Normal Text", subText = "Sub Text")
             }
         }
     }
+}
+
+@Composable
+fun SuperScriptText(normalText: String, superText: String) {
+    Text(text = buildAnnotatedString {
+        withStyle(style = SpanStyle(fontSize = 16.sp)) {
+            append(normalText)
+        }
+
+        withStyle(
+            style = SpanStyle(
+                fontSize = 10.sp,
+                fontWeight = FontWeight.Normal,
+                baselineShift = BaselineShift.Superscript
+            )
+        ) {
+            append(superText)
+        }
+    })
+}
+
+@Composable
+fun SubScriptText(normalText: String, subText: String) {
+    Text(text = buildAnnotatedString {
+        withStyle(style = SpanStyle(fontSize = 16.sp)) {
+            append(normalText)
+        }
+
+        withStyle(
+            style = SpanStyle(
+                fontSize = 10.sp,
+                fontWeight = FontWeight.Normal,
+                baselineShift = BaselineShift.Subscript
+            )
+        ) {
+            append(subText)
+        }
+    })
 }
