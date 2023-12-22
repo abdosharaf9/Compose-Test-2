@@ -3,109 +3,39 @@ package com.abdosharaf.composetest2
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.selection.DisableSelection
-import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.ParagraphStyle
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.BaselineShift
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.abdosharaf.composetest2.ui.theme.ComposeTest2Theme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ComposeTest2Theme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-
-                }
-            }
+            MainScreen()
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    ComposeTest2Theme {
-        SelectionContainer {
-            Column(modifier = Modifier.fillMaxSize()) {
-                SuperScriptText(normalText = "Normal Text", superText = "Super Text")
-                SubScriptText(normalText = "Normal Text", subText = "Sub Text")
-            }
-        }
+fun DefaultPreview() {
+    MainScreen()
+}
+
+@Composable
+fun MainScreen() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(8.dp)
+    ) {
+        ExpandableTextCard(
+            title = "The Title",
+            description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sodales laoreet commodo. Phasellus a purus eu risus elementum consequat. Aenean eu elit ut nunc convallis laoreet non ut libero. Suspendisse interdum placerat risus vel ornare. Donec vehicula, turpis sed consectetur ullamcorper, ante nunc egestas quam, ultricies adipiscing velit enim at nunc."
+        )
     }
-}
-
-@Composable
-fun SuperScriptText(normalText: String, superText: String) {
-    Text(text = buildAnnotatedString {
-        withStyle(style = SpanStyle(fontSize = 16.sp)) {
-            append(normalText)
-        }
-
-        withStyle(
-            style = SpanStyle(
-                fontSize = 10.sp,
-                fontWeight = FontWeight.Normal,
-                baselineShift = BaselineShift.Superscript
-            )
-        ) {
-            append(superText)
-        }
-    })
-}
-
-@Composable
-fun SubScriptText(normalText: String, subText: String) {
-    Text(text = buildAnnotatedString {
-        withStyle(style = SpanStyle(fontSize = 16.sp)) {
-            append(normalText)
-        }
-
-        withStyle(
-            style = SpanStyle(
-                fontSize = 10.sp,
-                fontWeight = FontWeight.Normal,
-                baselineShift = BaselineShift.Subscript
-            )
-        ) {
-            append(subText)
-        }
-    })
 }
