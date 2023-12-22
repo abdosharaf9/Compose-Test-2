@@ -17,6 +17,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.selection.DisableSelection
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -60,70 +62,14 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ComposeTest2Theme {
-        Column(modifier = Modifier.fillMaxSize()) {
-            CustomText3()
+        SelectionContainer {
+            Column {
+                Text(text = "Hello World!")
+                DisableSelection {
+                    Text(text = "Not selectable text")
+                }
+                Text(text = "Hello World!")
+            }
         }
     }
-}
-
-@Composable
-private fun CustomText() {
-    Text(
-//                text = "Hello World!",
-        text = stringResource(id = R.string.app_name),
-        modifier = Modifier
-            .background(MaterialTheme.colorScheme.primary)
-            .padding(16.dp)
-            .width(300.dp),
-        color = Color.White,
-//                fontSize = MaterialTheme.typography.headlineMedium.fontSize,
-        fontSize = 30.sp,
-        fontStyle = FontStyle.Italic,
-        fontWeight = FontWeight.Bold,
-        textAlign = TextAlign.Center,
-//                style = MaterialTheme.typography.headlineLarge
-    )
-}
-
-@Composable
-private fun CustomText2() {
-    Text(
-        text = buildAnnotatedString {
-            withStyle(style = ParagraphStyle(textAlign = TextAlign.Center)) {
-                withStyle(
-                    style = SpanStyle(
-                        color = Color.Blue,
-                        fontSize = 30.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                ) {
-                    append("A")
-                }
-
-                append("B")
-
-                withStyle(
-                    style = SpanStyle(
-                        color = Color.Blue,
-                        fontSize = 30.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                ) {
-                    append("D")
-                }
-
-                append("O")
-            }
-        },
-        modifier = Modifier.width(300.dp)
-    )
-}
-
-@Composable
-fun CustomText3() {
-    Text(
-        text = "I Love Android! ".repeat(20),
-        maxLines = 3,
-        overflow = TextOverflow.Ellipsis
-    )
 }
