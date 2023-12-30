@@ -24,7 +24,9 @@ fun HomeScreen(navController: NavHostController) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Text(
             modifier = Modifier.clickable {
-                navController.navigate(Screen.Detail.route)
+//                navController.navigate(Screen.Detail.passArguments(id = 10, name = "Abdo Sharaf"))
+//                navController.navigate(route = Screen.Detail.passId(10))
+                navController.navigate(route = Screen.Detail.route)
             },
             text = "Home",
             style = MaterialTheme.typography.displayMedium,
