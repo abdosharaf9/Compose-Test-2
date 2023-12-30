@@ -1,4 +1,4 @@
-package com.abdosharaf.composetest2
+package com.abdosharaf.composetest2.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -15,24 +15,18 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 @Preview(showBackground = true)
-fun DetailScreenPreview() {
-    DetailScreen(rememberNavController())
+fun SignUpScreenPreview() {
+    SignUpScreen(rememberNavController())
 }
 
 @Composable
-fun DetailScreen(navController: NavHostController) {
+fun SignUpScreen(navController: NavHostController) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Text(
             modifier = Modifier.clickable {
-                navController.navigate(Screen.Home.route) {
-                    popUpTo(Screen.Home.route) {
-                        inclusive = true
-                    }
-                }
-
-//                navController.popBackStack()
+                navController.popBackStack()
             },
-            text = "Detail",
+            text = "Sign Up",
             style = MaterialTheme.typography.displayMedium,
             color = Color.Blue
         )
