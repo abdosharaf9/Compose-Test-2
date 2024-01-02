@@ -93,4 +93,7 @@ dependencies {
 
     // Splash API
     implementation("androidx.core:core-splashscreen:1.0.1")
+
+    // Swipeable Component
+    implementation("me.saket.swipe:swipe:1.2.0")
 }
