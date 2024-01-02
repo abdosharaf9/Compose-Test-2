@@ -4,33 +4,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -51,56 +39,72 @@ fun DefaultPreview() {
 
 @Composable
 fun MainScreen() {
-    val icons = listOf(
-        Icons.Default.AccountCircle,
-        Icons.Default.CheckCircle,
-        Icons.Default.AccountBox,
-        Icons.Default.DateRange,
-        Icons.Default.Email
-    )
+    val window = rememberWindowSize()
+    when (window.width) {
+        WindowType.Compact -> {
+            CompactLayout()
+        }
 
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-            .border(1.dp, color = Color.Black),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
+        WindowType.Medium -> {
+            MediumLayout()
+        }
+
+        else -> {
+            MediumLayout()
+//            ExpandedLayout()
+        }
+    }
+}
+
+@Composable
+fun CompactLayout() {
+    Column(modifier = Modifier.fillMaxSize()) {
         Image(
             painter = painterResource(id = R.drawable.ic_launcher_background),
             contentDescription = null,
-            modifier = Modifier.weight(1f),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
         )
 
-        Spacer(modifier = Modifier.width(12.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
-        BoxWithConstraints(modifier = Modifier.weight(1.5f)) {
-            val iconSize = 24.dp
-            val padding = 24.dp
-            val numberOfIconsToShow = maxWidth.div(iconSize + padding).toInt().minus(1)
-            val remainingIcons = icons.size - numberOfIconsToShow
-
-            Row(horizontalArrangement = Arrangement.spacedBy(padding)) {
-                icons.take(numberOfIconsToShow).forEach {
-                    Icon(
-                        imageVector = it,
-                        contentDescription = null,
-                        modifier = Modifier.size(iconSize)
-                    )
-                }
-
-                if (remainingIcons > 0) {
-                    Box(
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .background(Color.LightGray)
-                            .padding(6.dp)
-                    ) {
-                        Text(text = "+$remainingIcons")
-                    }
-                }
-            }
-        }
+        Text(
+            text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pharetra sodales dolor ut consequat. Morbi tristique laoreet pulvinar. Aliquam erat volutpat. Sed sem odio, tristique ut porta quis, suscipit quis erat. Nunc non velit eu mi fermentum viverra non a leo. Integer maximus leo euismod aliquam sagittis. Nulla eu est diam. Nulla vel velit sed leo suscipit laoreet. Proin nec aliquam orci. Quisque cursus metus et mollis ultrices. Mauris quis lobortis augue. Nunc vitae libero vitae libero elementum lobortis. Ut id consequat neque, ut commodo turpis. Proin magna metus, fringilla quis volutpat ut, tincidunt quis turpis. Nam id maximus erat, vitae lobortis risus. Mauris faucibus convallis iaculis.",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            maxLines = 5,
+            overflow = TextOverflow.Ellipsis
+        )
     }
+}
+
+@Composable
+fun MediumLayout() {
+    Row(modifier = Modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_launcher_background),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.size(400.dp)
+        )
+
+        Spacer(modifier = Modifier.width(16.dp))
+
+        Text(
+            text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pharetra sodales dolor ut consequat. Morbi tristique laoreet pulvinar. Aliquam erat volutpat. Sed sem odio, tristique ut porta quis, suscipit quis erat. Nunc non velit eu mi fermentum viverra non a leo. Integer maximus leo euismod aliquam sagittis. Nulla eu est diam. Nulla vel velit sed leo suscipit laoreet. Proin nec aliquam orci. Quisque cursus metus et mollis ultrices. Mauris quis lobortis augue. Nunc vitae libero vitae libero elementum lobortis. Ut id consequat neque, ut commodo turpis. Proin magna metus, fringilla quis volutpat ut, tincidunt quis turpis. Nam id maximus erat, vitae lobortis risus. Mauris faucibus convallis iaculis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pharetra sodales dolor ut consequat. Morbi tristique laoreet pulvinar. Aliquam erat volutpat. Sed sem odio, tristique ut porta quis, suscipit quis erat. Nunc non velit eu mi fermentum viverra non a leo. Integer maximus leo euismod aliquam sagittis. Nulla eu est diam. Nulla vel velit sed leo suscipit laoreet. Proin nec aliquam orci. Quisque cursus metus et mollis ultrices. Mauris quis lobortis augue. Nunc vitae libero vitae libero elementum lobortis. Ut id consequat neque, ut commodo turpis. Proin magna metus, fringilla quis volutpat ut, tincidunt quis turpis. Nam id maximus erat, vitae lobortis risus. Mauris faucibus convallis iaculis.",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(end = 16.dp),
+            maxLines = 10,
+            overflow = TextOverflow.Ellipsis
+        )
+    }
+}
+
+@Composable
+fun ExpandedLayout() {
+    // The UI design you need
 }
