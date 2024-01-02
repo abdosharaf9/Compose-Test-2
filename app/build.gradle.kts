@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("dagger.hilt.android.plugin")
+    id("kotlin-kapt")
 }
 
 android {
@@ -71,8 +73,24 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.5.0")
 
     // Navigation
-    implementation("androidx.navigation:navigation-compose:2.7.5")
+    implementation("androidx.navigation:navigation-compose:2.7.6")
 
     // System UI Controller - Accompanist
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
+
+    // Pager and Indicators - Accompanist
+    implementation("com.google.accompanist:accompanist-pager:0.24.2-alpha")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.24.2-alpha")
+
+    // DataStore Preferences
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
+    kapt("androidx.hilt:hilt-compiler:1.1.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+
+    // Splash API
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }
