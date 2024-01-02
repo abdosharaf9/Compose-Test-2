@@ -100,4 +100,7 @@ dependencies {
 
     // Draw Box
     implementation("io.ak1:drawbox:1.0.3")
+
+    // Permissions - Accompanist
+    implementation("com.google.accompanist:accompanist-permissions:0.24.9-beta")
 }
