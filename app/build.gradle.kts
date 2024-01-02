@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -96,4 +97,7 @@ dependencies {
 
     // Swipeable Component
     implementation("me.saket.swipe:swipe:1.2.0")
+
+    // Draw Box
+    implementation("io.ak1:drawbox:1.0.3")
 }
