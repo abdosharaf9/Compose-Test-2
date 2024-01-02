@@ -1,25 +1,25 @@
 package com.abdosharaf.composetest2
 
-import android.Manifest
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.PermissionStatus
-import com.google.accompanist.permissions.rememberMultiplePermissionsState
-import com.google.accompanist.permissions.rememberPermissionState
+import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,32 +36,62 @@ fun DefaultPreview() {
     MainScreen()
 }
 
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun MainScreen() {
-    val permissionState = rememberPermissionState(permission = Manifest.permission.CAMERA)
-
-    val permissionsState = rememberMultiplePermissionsState(permissions = listOf(
-        Manifest.permission.CAMERA,
-        Manifest.permission.RECORD_AUDIO
-    ))
-
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(
-            text = if (permissionState.status is PermissionStatus.Granted) "Granted"
-            else "Need the camera permission"
-        )
+        val text = "This is a links test, so please click here, and you can also see this."
+        val linksText = listOf("click here", "see this")
+        val links = listOf("https://www.github.com/abdosharaf9", "https://www.linkedin.com/in/abdosharaf")
 
-        Spacer(modifier = Modifier.height(16.dp))
+        val annotatedString = buildAnnotatedString {
+            append(text)
+            linksText.forEachIndexed { index, linkText ->
+                val startIndex = text.indexOf(linkText)
+                val endIndex = startIndex + linkText.length
 
-        if (permissionState.status !is PermissionStatus.Granted) {
-            Button(onClick = { permissionState.launchPermissionRequest() }) {
-                Text(text = "Request")
+                addStyle(
+                    style = SpanStyle(
+                        color = Color.Blue,
+                        textDecoration = TextDecoration.Underline
+                    ),
+                    start = startIndex,
+                    end = endIndex
+                )
+
+                addStringAnnotation(
+                    tag = "URL",
+                    annotation = links[index],
+                    start = startIndex,
+                    end = endIndex
+                )
             }
+
+            addStyle(
+                style = SpanStyle(
+                    fontSize = 16.sp
+                ),
+                start = 0,
+                end = text.length
+            )
         }
+
+        val uriHandler = LocalUriHandler.current
+
+        ClickableText(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            text = annotatedString,
+            onClick = {
+                annotatedString.getStringAnnotations("URL", it, it)
+                    .firstOrNull()?.let { stringAnnotation ->
+                        uriHandler.openUri(stringAnnotation.item)
+                    }
+            }
+        )
     }
 }

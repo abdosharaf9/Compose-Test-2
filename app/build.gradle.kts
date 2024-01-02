@@ -103,4 +103,7 @@ dependencies {
 
     // Permissions - Accompanist
     implementation("com.google.accompanist:accompanist-permissions:0.24.9-beta")
+
+    // Material Icons Extended
+    implementation("androidx.compose.material:material-icons-extended:1.5.4")
 }
