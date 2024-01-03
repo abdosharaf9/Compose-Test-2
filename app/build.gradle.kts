@@ -106,4 +106,7 @@ dependencies {
 
     // Material Icons Extended
 //    implementation("androidx.compose.material:material-icons-extended:1.5.4")
+
+    // WebView Accompanist
+    implementation("com.google.accompanist:accompanist-webview:0.33.2-alpha")
 }
