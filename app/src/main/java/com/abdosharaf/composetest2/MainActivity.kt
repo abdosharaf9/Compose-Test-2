@@ -28,7 +28,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -41,7 +40,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Preview(showBackground = true)
+@FontPreviews
 @Composable
 fun DefaultPreview() {
     MainScreen()
@@ -52,34 +51,38 @@ fun MainScreen() {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        val list = remember {
-            List(size = 25) { it }
-        }
         val state = rememberLazyListState()
-        val padding by animateDpAsState(
-            targetValue = if (state.isScrolled) 0.dp else 64.dp,
-            animationSpec = tween(durationMillis = 300),
-            label = ""
-        )
-
-        LazyColumn(
-            modifier = Modifier.padding(top = padding),
-            contentPadding = PaddingValues(16.dp),
-            state = state,
-            verticalArrangement = Arrangement.spacedBy(24.dp)
-        ) {
-            items(items = list, key = { it }) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(40.dp)
-                        .clip(RoundedCornerShape(20.dp))
-                        .background(Color.LightGray)
-                )
-            }
-        }
-
+        MainContent(state)
         TopBar(state)
+    }
+}
+
+@Composable
+private fun MainContent(state: LazyListState) {
+    val list = remember {
+        List(size = 25) { it }
+    }
+    val padding by animateDpAsState(
+        targetValue = if (state.isScrolled) 0.dp else 64.dp,
+        animationSpec = tween(durationMillis = 300),
+        label = ""
+    )
+
+    LazyColumn(
+        modifier = Modifier.padding(top = padding),
+        contentPadding = PaddingValues(16.dp),
+        state = state,
+        verticalArrangement = Arrangement.spacedBy(24.dp)
+    ) {
+        items(items = list, key = { it }) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(40.dp)
+                    .clip(RoundedCornerShape(20.dp))
+                    .background(Color.LightGray)
+            )
+        }
     }
 }
 
