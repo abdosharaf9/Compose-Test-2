@@ -109,4 +109,7 @@ dependencies {
 
     // WebView Accompanist
     implementation("com.google.accompanist:accompanist-webview:0.33.2-alpha")
+
+    // Color Picker
+    implementation("com.github.skydoves:colorpicker-compose:1.0.7")
 }
