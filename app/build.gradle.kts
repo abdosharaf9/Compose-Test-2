@@ -112,4 +112,9 @@ dependencies {
 
     // Color Picker
     implementation("com.github.skydoves:colorpicker-compose:1.0.7")
+
+    // Sheets & Dialogs
+//    implementation("com.maxkepperler.sheets-compose-dialogs:core:1.0.2")
+//    implementation("com.maxkepperler.sheets-compose-dialogs:calender:1.0.2")
+//    implementation("com.maxkepperler.sheets-compose-dialogs:clock:1.0.2")
 }
