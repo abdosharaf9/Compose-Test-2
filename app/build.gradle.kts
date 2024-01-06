@@ -117,4 +117,7 @@ dependencies {
 //    implementation("com.maxkepperler.sheets-compose-dialogs:core:1.0.2")
 //    implementation("com.maxkepperler.sheets-compose-dialogs:calender:1.0.2")
 //    implementation("com.maxkepperler.sheets-compose-dialogs:clock:1.0.2")
+
+    // Lottie Animation
+    implementation("com.airbnb.android:lottie-compose:6.3.0")
 }
