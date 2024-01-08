@@ -1,6 +1,7 @@
 package com.abdosharaf.composetest2.data.remote
 
 import com.abdosharaf.composetest2.BuildConfig
+import com.abdosharaf.composetest2.model.SearchResult
 import com.abdosharaf.composetest2.model.UnsplashImage
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -19,7 +20,7 @@ interface UnsplashApi {
     @Headers("Authorization: Client-ID ${BuildConfig.API_KEY}")
     @GET("/search/photos")
     suspend fun searchImages(
-        @Query("page") page: Int,
-        @Query("per_page") perPage: Int
-    ): List<UnsplashImage>
+        @Query("query") query: String,
+        @Query("page") page: Int
+    ): SearchResult
 }

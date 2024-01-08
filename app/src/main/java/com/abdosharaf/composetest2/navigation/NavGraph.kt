@@ -17,7 +17,9 @@ fun SetupNavGraph(navController: NavHostController) {
         }
 
         composable(route = Screen.SearchScreen.route) {
-            SearchScreen(navController)
+            SearchScreen(onCloseClicked = {
+                navController.popBackStack()
+            })
         }
     }
 }

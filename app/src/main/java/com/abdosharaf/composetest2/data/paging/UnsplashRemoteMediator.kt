@@ -9,10 +9,9 @@ import com.abdosharaf.composetest2.data.local.UnsplashDatabase
 import com.abdosharaf.composetest2.data.remote.UnsplashApi
 import com.abdosharaf.composetest2.model.UnsplashImage
 import com.abdosharaf.composetest2.model.UnsplashRemoteKeys
-import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class UnsplashRemoteMediator @Inject constructor(
+class UnsplashRemoteMediator(
     private val database: UnsplashDatabase,
     private val unsplashApi: UnsplashApi
 ) : RemoteMediator<Int, UnsplashImage>() {
