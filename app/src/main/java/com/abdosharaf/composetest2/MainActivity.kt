@@ -5,8 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.rememberNavController
-import com.abdosharaf.composetest2.navigation.SetupNavigation
 import com.abdosharaf.composetest2.ui.theme.ComposeTest2Theme
 
 class MainActivity : ComponentActivity() {
@@ -28,6 +26,5 @@ fun DefaultPreview() {
 
 @Composable
 fun MainScreen() {
-    val navController = rememberNavController()
-    SetupNavigation(navController = navController)
+
 }
